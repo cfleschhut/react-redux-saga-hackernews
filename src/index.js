@@ -6,7 +6,10 @@ import store from './store';
 import './index.css';
 
 ReactDOM.render(
-  <App stories={store.getState()} onArchive={id => console.log(id)} />,
+  <App
+    stories={store.getState().storyState}
+    onArchive={id => console.log(id)}
+  />,
   document.getElementById('root'),
 );
 

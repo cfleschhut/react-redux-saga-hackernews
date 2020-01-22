@@ -2,10 +2,10 @@ import React from 'react';
 import Stories from './Stories';
 import './App.css';
 
-function App({ stories }) {
+function App({ stories, onArchive }) {
   return (
     <div className="App">
-      <Stories stories={stories} />
+      <Stories stories={stories} onArchive={onArchive} />
     </div>
   );
 }

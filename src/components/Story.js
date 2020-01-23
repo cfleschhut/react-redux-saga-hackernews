@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { doArchiveStory } from '../actions/archive';
+import ButtonInline from './ButtonInline';
 import './Story.css';
 
 const Story = ({ story, columns, onArchive }) => {
@@ -22,18 +23,6 @@ const Story = ({ story, columns, onArchive }) => {
     </div>
   );
 };
-
-const ButtonInline = ({ onClick, type = 'button', children }) => (
-  <Button type={type} className="button-inline" onClick={onClick}>
-    {children}
-  </Button>
-);
-
-const Button = ({ onClick, className, type = 'button', children }) => (
-  <button type={type} className={className} onClick={onClick}>
-    {children}
-  </button>
-);
 
 const mapDispatchToProps = dispatch => ({
   onArchive(id) {

@@ -24,7 +24,9 @@ const INITIAL_STATE = {
 
 const applyFetchErrorStories = (state, action) => ({
   stories: [],
-  error: action.error,
+  error: {
+    message: action.error.message,
+  },
 });
 
 const applyAddStories = (state, action) => ({

@@ -31,7 +31,9 @@ const Stories = ({ stories, error }) => {
     <div className="stories">
       <StoriesHeader columns={COLUMNS} />
 
-      {error && <p className="error">Something went wrong…</p>}
+      {error && error.message && (
+        <p className="error">{`Something went wrong… (${error.message})`}</p>
+      )}
 
       {(stories || []).map(story => (
         <Story key={story.objectID} story={story} columns={COLUMNS} />

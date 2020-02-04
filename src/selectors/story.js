@@ -6,4 +6,13 @@ const getReadableStories = ({ storyState, archiveState }) =>
 
 const getFetchError = ({ storyState }) => storyState.error;
 
-export { getReadableStories, getFetchError };
+const getStorySearchQuery = ({ storyState }) => storyState.query;
+
+const getStorySearchPage = ({ storyState }) => storyState.page;
+
+export {
+  getReadableStories,
+  getFetchError,
+  getStorySearchQuery,
+  getStorySearchPage,
+};

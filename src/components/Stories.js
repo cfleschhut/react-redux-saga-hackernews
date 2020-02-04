@@ -1,60 +1,42 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getReadableStories, getFetchError } from '../selectors/story';
-import Story from './Story';
+import {
+  getReadableStories,
+  getFetchError,
+  getStorySearchQuery,
+  getStorySearchPage,
+} from '../selectors/story';
+import StoriesHeader from './StoriesHeader';
+import StoriesList from './StoriesList';
 import './Stories.css';
 
-const COLUMNS = {
-  title: {
-    label: 'Title',
-    width: '40%',
-  },
-  author: {
-    label: 'Author',
-    width: '30%',
-  },
-  comments: {
-    label: 'Comments',
-    width: '10%',
-  },
-  points: {
-    label: 'Points',
-    width: '10%',
-  },
-  archive: {
-    width: '10%',
-  },
-};
-
-const Stories = ({ stories, error }) => {
+const Stories = ({ stories, error, query, page, isLoading }) => {
   return (
     <div className="stories">
-      <StoriesHeader columns={COLUMNS} />
+      <StoriesHeader />
 
       {error && error.message && (
         <p className="error">{`Something went wrong… (${error.message})`}</p>
       )}
 
-      {(stories || []).map(story => (
-        <Story key={story.objectID} story={story} columns={COLUMNS} />
-      ))}
+      <StoriesList
+        stories={stories}
+        query={query}
+        page={page}
+        isLoading={isLoading}
+      />
     </div>
   );
 };
 
-const StoriesHeader = ({ columns }) => (
-  <div className="stories-header">
-    {Object.keys(columns).map(key => (
-      <span key={key} style={{ width: columns[key].width }}>
-        {columns[key].label}
-      </span>
-    ))}
-  </div>
-);
-
-const mapStateToProps = state => ({
-  stories: getReadableStories(state),
-  error: getFetchError(state),
-});
+const mapStateToProps = state => {
+  return {
+    stories: getReadableStories(state),
+    error: getFetchError(state),
+    query: getStorySearchQuery(state),
+    page: getStorySearchPage(state),
+    isLoading: state.storyState.isLoading,
+  };
+};
 
 export default connect(mapStateToProps)(Stories);

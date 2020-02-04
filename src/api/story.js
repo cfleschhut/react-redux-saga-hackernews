@@ -1,6 +1,9 @@
-const HN_BASE_URL = 'https://hn.algolia.com/api/v1/search?query=';
+const HN_BASE_URL = 'https://hn.algolia.com/api/v1/search';
 
-const fetchStories = query =>
-  fetch(HN_BASE_URL + query).then(response => response.json());
+const getHackerNewsUrl = (query, page) =>
+  `${HN_BASE_URL}?query=${query}&page=${page}&hitsPerPage=3`;
+
+const fetchStories = (query, page) =>
+  fetch(getHackerNewsUrl(query, page)).then(response => response.json());
 
 export { fetchStories };

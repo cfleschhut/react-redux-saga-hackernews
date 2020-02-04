@@ -11,9 +11,10 @@ class SearchStories extends Component {
   onSubmit = event => {
     event.preventDefault();
     const { query } = this.state;
+    const page = 0;
 
     if (query) {
-      this.props.onFetchStories(query);
+      this.props.onFetchStories(query, page);
       this.setState({ query: '' });
     }
   };
@@ -33,8 +34,8 @@ class SearchStories extends Component {
 }
 
 const mapDispatchToProps = dispatch => ({
-  onFetchStories(query) {
-    dispatch(doFetchStories(query));
+  onFetchStories(query, page) {
+    dispatch(doFetchStories(query, page));
   },
 });
 
